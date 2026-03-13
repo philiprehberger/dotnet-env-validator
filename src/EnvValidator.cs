@@ -1,4 +1,5 @@
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace Philiprehberger.EnvValidator;
 
@@ -9,6 +10,8 @@ public class EnvVarAttribute : Attribute
     public bool Required { get; set; } = true;
     public string? Default { get; set; }
     public string[]? Choices { get; set; }
+    public string? Pattern { get; set; }
+    public string Separator { get; set; } = ",";
 
     public EnvVarAttribute(string name) => Name = name;
 }
@@ -61,9 +64,15 @@ public static class EnvValidator
                 continue;
             }
 
+            if (attr.Pattern != null && !Regex.IsMatch(raw, attr.Pattern))
+            {
+                errors.Add($"Variable '{attr.Name}' does not match required pattern '{attr.Pattern}'");
+                continue;
+            }
+
             try
             {
-                var value = ConvertValue(raw, prop.PropertyType, attr.Name);
+                var value = ConvertValue(raw, prop.PropertyType, attr.Name, attr.Separator);
                 prop.SetValue(instance, value);
             }
             catch (Exception ex)
@@ -78,7 +87,7 @@ public static class EnvValidator
         return instance;
     }
 
-    private static object? ConvertValue(string raw, Type type, string name)
+    private static object? ConvertValue(string raw, Type type, string name, string separator)
     {
         if (type == typeof(string)) return raw;
         if (type == typeof(int)) return int.TryParse(raw, out var i) ? i : throw new FormatException($"{name}: cannot convert '{raw}' to int");
@@ -93,6 +102,37 @@ public static class EnvValidator
         if (type == typeof(Uri)) return new Uri(raw);
         if (type == typeof(TimeSpan)) return TimeSpan.TryParse(raw, out var ts) ? ts : throw new FormatException($"{name}: cannot convert '{raw}' to TimeSpan");
 
+        if (type.IsEnum)
+        {
+            if (Enum.TryParse(type, raw, ignoreCase: true, out var result))
+                return result;
+            var validValues = string.Join(", ", Enum.GetNames(type));
+            throw new FormatException($"{name}: cannot convert '{raw}' to {type.Name}. Valid values: {validValues}");
+        }
+
+        if (type == typeof(string[]))
+            return raw.Split(separator).Select(s => s.Trim()).ToArray();
+
+        if (type == typeof(int[]))
+            return ParseIntCollection(raw, name, separator).ToArray();
+
+        if (type == typeof(List<string>))
+            return raw.Split(separator).Select(s => s.Trim()).ToList();
+
+        if (type == typeof(List<int>))
+            return ParseIntCollection(raw, name, separator).ToList();
+
         throw new NotSupportedException($"{name}: unsupported type {type.Name}");
+    }
+
+    private static IEnumerable<int> ParseIntCollection(string raw, string name, string separator)
+    {
+        var parts = raw.Split(separator).Select(s => s.Trim());
+        foreach (var part in parts)
+        {
+            if (!int.TryParse(part, out var val))
+                throw new FormatException($"{name}: cannot convert '{part}' to int in collection");
+            yield return val;
+        }
     }
 }

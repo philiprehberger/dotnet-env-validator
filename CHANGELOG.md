@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.0 (2026-03-13)
+
+### Added
+- Enum type support with case-insensitive parsing
+- `Pattern` property for regex validation of environment variable values
+- Collection parsing for `string[]`, `int[]`, `List<string>`, and `List<int>` properties
+- `Separator` property for custom collection delimiters (default comma)
+
 ## 0.1.1 (2026-03-10)
 
 - Add README to NuGet package so it displays on nuget.org
