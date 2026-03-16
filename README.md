@@ -131,6 +131,12 @@ Bool accepts: `true`/`false`, `1`/`0`, `yes`/`no`, `on`/`off`
 | `Pattern` | `string?` | `null` | Regex pattern the raw value must match |
 | `Separator` | `string` | `","` | Delimiter for collection/array parsing |
 
+## Development
+
+```bash
+dotnet build src/Philiprehberger.EnvValidator.csproj --configuration Release
+```
+
 ## License
 
 MIT
