@@ -1,5 +1,9 @@
 # Philiprehberger.EnvValidator
 
+[![CI](https://github.com/philiprehberger/dotnet-env-validator/actions/workflows/ci.yml/badge.svg)](https://github.com/philiprehberger/dotnet-env-validator/actions/workflows/ci.yml)
+[![NuGet](https://img.shields.io/nuget/v/Philiprehberger.EnvValidator.svg)](https://www.nuget.org/packages/Philiprehberger.EnvValidator)
+[![License](https://img.shields.io/github/license/philiprehberger/dotnet-env-validator)](LICENSE)
+
 Declarative environment variable validation for .NET — attribute-based binding with type coercion.
 
 ## Install
