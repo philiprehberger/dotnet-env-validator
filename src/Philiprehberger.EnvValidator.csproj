@@ -4,8 +4,10 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <PackageId>Philiprehberger.EnvValidator</PackageId>
-    <Version>0.2.3</Version>
+    <Version>0.2.4</Version>
     <Authors>Philip Rehberger</Authors>
     <Description>Attribute-based environment variable validation for .NET</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

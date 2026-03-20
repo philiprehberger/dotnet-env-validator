@@ -131,6 +131,26 @@ Bool accepts: `true`/`false`, `1`/`0`, `yes`/`no`, `on`/`off`
 | `Pattern` | `string?` | `null` | Regex pattern the raw value must match |
 | `Separator` | `string` | `","` | Delimiter for collection/array parsing |
 
+## API
+
+### `EnvValidator`
+
+| Method | Description |
+|--------|-------------|
+| `Validate<T>()` | Validate environment variables and bind to a typed class |
+| `Validate<T>(source)` | Validate from a custom dictionary source |
+
+### `EnvVarAttribute`
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `Name` | `string` | — | Environment variable name |
+| `Required` | `bool` | `true` | Whether the variable must be set |
+| `Default` | `string?` | `null` | Default value if not set |
+| `Choices` | `string[]?` | `null` | Allowed values |
+| `Pattern` | `string?` | `null` | Regex pattern to match |
+| `Separator` | `string` | `","` | Separator for list values |
+
 ## Development
 
 ```bash

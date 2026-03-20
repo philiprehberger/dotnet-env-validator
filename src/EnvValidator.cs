@@ -3,23 +3,63 @@ using System.Text.RegularExpressions;
 
 namespace Philiprehberger.EnvValidator;
 
+/// <summary>
+/// Marks a property for binding to an environment variable.
+/// </summary>
 [AttributeUsage(AttributeTargets.Property)]
 public class EnvVarAttribute : Attribute
 {
+    /// <summary>
+    /// Gets the environment variable name.
+    /// </summary>
     public string Name { get; }
+
+    /// <summary>
+    /// Gets or sets whether the variable is required. Defaults to <c>true</c>.
+    /// </summary>
     public bool Required { get; set; } = true;
+
+    /// <summary>
+    /// Gets or sets the default value used when the variable is missing.
+    /// </summary>
     public string? Default { get; set; }
+
+    /// <summary>
+    /// Gets or sets the allowed values for the variable.
+    /// </summary>
     public string[]? Choices { get; set; }
+
+    /// <summary>
+    /// Gets or sets a regex pattern the variable value must match.
+    /// </summary>
     public string? Pattern { get; set; }
+
+    /// <summary>
+    /// Gets or sets the separator for collection types. Defaults to <c>","</c>.
+    /// </summary>
     public string Separator { get; set; } = ",";
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="EnvVarAttribute"/> class.
+    /// </summary>
+    /// <param name="name">The environment variable name to bind to.</param>
     public EnvVarAttribute(string name) => Name = name;
 }
 
+/// <summary>
+/// Thrown when one or more environment variable validations fail.
+/// </summary>
 public class ValidationException : Exception
 {
+    /// <summary>
+    /// Gets the list of validation error messages.
+    /// </summary>
     public List<string> Errors { get; }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ValidationException"/> class.
+    /// </summary>
+    /// <param name="errors">The list of validation error messages.</param>
     public ValidationException(List<string> errors)
         : base($"{errors.Count} validation error(s):\n" + string.Join("\n", errors.Select(e => $"  - {e}")))
     {
@@ -27,10 +67,26 @@ public class ValidationException : Exception
     }
 }
 
+/// <summary>
+/// Validates and binds environment variables to a strongly-typed configuration object.
+/// </summary>
 public static class EnvValidator
 {
+    /// <summary>
+    /// Validates environment variables from <see cref="Environment.GetEnvironmentVariable(string)"/> and binds them to a new instance of <typeparamref name="T"/>.
+    /// </summary>
+    /// <typeparam name="T">The configuration type with <see cref="EnvVarAttribute"/>-decorated properties.</typeparam>
+    /// <returns>A populated instance of <typeparamref name="T"/>.</returns>
+    /// <exception cref="ValidationException">Thrown when one or more validations fail.</exception>
     public static T Validate<T>() where T : new() => Validate<T>(null);
 
+    /// <summary>
+    /// Validates environment variables from the given source dictionary (or the system environment if <c>null</c>) and binds them to a new instance of <typeparamref name="T"/>.
+    /// </summary>
+    /// <typeparam name="T">The configuration type with <see cref="EnvVarAttribute"/>-decorated properties.</typeparam>
+    /// <param name="source">An optional dictionary of variable names to values. When <c>null</c>, reads from system environment variables.</param>
+    /// <returns>A populated instance of <typeparamref name="T"/>.</returns>
+    /// <exception cref="ValidationException">Thrown when one or more validations fail.</exception>
     public static T Validate<T>(Dictionary<string, string>? source) where T : new()
     {
         var instance = new T();

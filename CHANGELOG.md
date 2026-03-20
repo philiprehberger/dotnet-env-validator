@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.4
+
+- Add API section to README
+- Add LangVersion and TreatWarningsAsErrors to csproj
+
 ## 0.2.3
 
 - Add Development section to README
