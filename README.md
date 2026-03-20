@@ -6,7 +6,7 @@
 
 Declarative environment variable validation for .NET — attribute-based binding with type coercion.
 
-## Install
+## Installation
 
 ```bash
 dotnet add package Philiprehberger.EnvValidator
@@ -114,23 +114,6 @@ catch (ValidationException ex)
 }
 ```
 
-## Supported Types
-
-`string`, `int`, `long`, `double`, `bool`, `Uri`, `TimeSpan`, enums, `string[]`, `int[]`, `List<string>`, `List<int>`
-
-Bool accepts: `true`/`false`, `1`/`0`, `yes`/`no`, `on`/`off`
-
-## Attribute Properties
-
-| Property | Type | Default | Description |
-|-----------|----------|---------|----------------------------------------------|
-| `Name` | `string` | — | Environment variable name (constructor arg) |
-| `Required` | `bool` | `true` | Whether the variable must be present |
-| `Default` | `string?` | `null` | Fallback value when variable is missing |
-| `Choices` | `string[]?` | `null` | Restrict to allowed values |
-| `Pattern` | `string?` | `null` | Regex pattern the raw value must match |
-| `Separator` | `string` | `","` | Delimiter for collection/array parsing |
-
 ## API
 
 ### `EnvValidator`
@@ -150,6 +133,23 @@ Bool accepts: `true`/`false`, `1`/`0`, `yes`/`no`, `on`/`off`
 | `Choices` | `string[]?` | `null` | Allowed values |
 | `Pattern` | `string?` | `null` | Regex pattern to match |
 | `Separator` | `string` | `","` | Separator for list values |
+
+### Supported Types
+
+`string`, `int`, `long`, `double`, `bool`, `Uri`, `TimeSpan`, enums, `string[]`, `int[]`, `List<string>`, `List<int>`
+
+Bool accepts: `true`/`false`, `1`/`0`, `yes`/`no`, `on`/`off`
+
+### Attribute Properties
+
+| Property | Type | Default | Description |
+|-----------|----------|---------|----------------------------------------------|
+| `Name` | `string` | — | Environment variable name (constructor arg) |
+| `Required` | `bool` | `true` | Whether the variable must be present |
+| `Default` | `string?` | `null` | Fallback value when variable is missing |
+| `Choices` | `string[]?` | `null` | Restrict to allowed values |
+| `Pattern` | `string?` | `null` | Regex pattern the raw value must match |
+| `Separator` | `string` | `","` | Delimiter for collection/array parsing |
 
 ## Development
 
