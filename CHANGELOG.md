@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.5 (2026-03-21)
+
+- Align csproj description with README
+
 ## 0.2.4
 
 - Add API section to README

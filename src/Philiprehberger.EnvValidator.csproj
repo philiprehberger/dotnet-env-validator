@@ -7,9 +7,9 @@
     <LangVersion>latest</LangVersion>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <PackageId>Philiprehberger.EnvValidator</PackageId>
-    <Version>0.2.4</Version>
+    <Version>0.2.5</Version>
     <Authors>Philip Rehberger</Authors>
-    <Description>Attribute-based environment variable validation for .NET</Description>
+    <Description>Declarative environment variable validation for .NET — attribute-based binding with type coercion.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/philiprehberger/dotnet-env-validator</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
