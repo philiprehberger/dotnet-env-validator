@@ -1,26 +1,29 @@
 # Changelog
 
+## 0.2.6 (2026-03-22)
+
+- Add dates to changelog entries
+
 ## 0.2.5 (2026-03-21)
 
 - Align csproj description with README
 
-## 0.2.4
+## 0.2.4 (2026-03-20)
 
 - Add API section to README
 - Add LangVersion and TreatWarningsAsErrors to csproj
 
-## 0.2.3
+## 0.2.3 (2026-03-16)
 
 - Add Development section to README
 - Add GenerateDocumentationFile and RepositoryType to .csproj
 
 ## 0.2.0 (2026-03-13)
 
-### Added
-- Enum type support with case-insensitive parsing
-- `Pattern` property for regex validation of environment variable values
-- Collection parsing for `string[]`, `int[]`, `List<string>`, and `List<int>` properties
-- `Separator` property for custom collection delimiters (default comma)
+- Add enum type support with case-insensitive parsing
+- Add `Pattern` property for regex validation of environment variable values
+- Add collection parsing for `string[]`, `int[]`, `List<string>`, and `List<int>` properties
+- Add `Separator` property for custom collection delimiters (default comma)
 
 ## 0.1.1 (2026-03-10)
 
