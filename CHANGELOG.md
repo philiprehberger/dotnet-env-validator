@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.7 (2026-03-24)
+
+- Add unit tests
+- Add test step to CI workflow
+
 ## 0.2.6 (2026-03-22)
 
 - Add dates to changelog entries
