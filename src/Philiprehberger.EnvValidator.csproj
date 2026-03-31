@@ -7,7 +7,7 @@
     <LangVersion>latest</LangVersion>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <PackageId>Philiprehberger.EnvValidator</PackageId>
-    <Version>0.2.8</Version>
+    <Version>0.2.9</Version>
     <Authors>Philip Rehberger</Authors>
     <Description>Declarative environment variable validation for .NET — attribute-based binding with type coercion.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
